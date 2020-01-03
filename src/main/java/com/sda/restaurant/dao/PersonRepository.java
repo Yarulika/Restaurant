@@ -1,6 +1,6 @@
 package com.sda.restaurant.repository;
 
-import com.sda.restaurant.entity.Person;
+import com.sda.restaurant.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
