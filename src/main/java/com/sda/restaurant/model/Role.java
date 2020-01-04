@@ -1,26 +1,26 @@
 package com.sda.restaurant.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "roles")
 @Getter
 @Setter
 @NoArgsConstructor
-//@Table(name = "roles")
+@AllArgsConstructor
+@ToString
 public class Role {
     @Column(name = "role_id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long roleId;
+    private Integer roleId;
     @Column(name = "role_title")
     private String roleTitle;
 
-    public Role(String roleTitle){
-        this.roleTitle = roleTitle;
-    }
+    @ManyToMany(mappedBy = "roles")
+    private Set<Person> persons = new HashSet<>();
+
 }

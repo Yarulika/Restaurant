@@ -1,17 +1,19 @@
 package com.sda.restaurant.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "orders")
 @Getter
 @Setter
 @NoArgsConstructor
-//@Table(name = "orders")
+@AllArgsConstructor
 public class Order {
     @Column(name = "order_id")
     @Id
@@ -27,4 +29,9 @@ public class Order {
     private Date date;
     @Column
     private int cost;
+
+    //order_meals
+    @OneToMany(mappedBy = "order")
+    private List<OrderMeals> orderMeals;
+
 }

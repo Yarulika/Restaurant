@@ -1,13 +1,10 @@
 package com.sda.restaurant.dao;
 
 import com.sda.restaurant.model.Person;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called personRepository
 //@Repository
-public interface PersonRepository extends CrudRepository<Person, Integer> {     //JpaRepository<Person, Integer>
+public interface PersonRepository extends JpaRepository<Person, Integer> {     //JpaRepository<Person, Integer>
 
-//    List<Person> findByName(String firstName);
-//    List<Person> findAll();
 }

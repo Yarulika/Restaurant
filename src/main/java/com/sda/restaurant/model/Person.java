@@ -1,22 +1,18 @@
 package com.sda.restaurant.model;
 
 import lombok.*;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.Set;
 
 @Entity(name = "persons") //This tells Hibernate to make a table out of this class
 @Getter
 @Setter
 @NoArgsConstructor
-
-@Data
 @AllArgsConstructor
-
 @ToString
-//@Table(name = "persons")
 public class Person {
     @Column(name = "person_id")
     @Id
@@ -39,15 +35,17 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<Order> orders;
 
-//    public Person(){
-//    }
-//
-//    public Person(String first_name, String last_name, String email, String address, String username, String password) {
-//        this.firstName = first_name;
-//        this.lastName = last_name;
-//        this.email = email;
-//        this.address = address;
-//        this.username = username;
-//        this.password = password;
-//    }
+    //Roles
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "persons_roles",
+            joinColumns = {@JoinColumn(name = "person_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")}
+    )
+    Set<Role> roles = new HashSet<>();
+
+
+
+
+
 }
