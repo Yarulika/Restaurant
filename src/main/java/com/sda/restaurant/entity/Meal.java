@@ -1,4 +1,4 @@
-package com.sda.restaurant.model;
+package com.sda.restaurant.entity;
 
 import lombok.*;
 

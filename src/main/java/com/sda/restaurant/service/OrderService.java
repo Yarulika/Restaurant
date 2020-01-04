@@ -1,7 +1,7 @@
 package com.sda.restaurant.service;
 
 import com.sda.restaurant.dao.OrderRepository;
-import com.sda.restaurant.model.Order;
+import com.sda.restaurant.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

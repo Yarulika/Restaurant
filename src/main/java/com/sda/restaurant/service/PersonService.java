@@ -1,7 +1,7 @@
 package com.sda.restaurant.service;
 
 import com.sda.restaurant.dao.PersonRepository;
-import com.sda.restaurant.model.Person;
+import com.sda.restaurant.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

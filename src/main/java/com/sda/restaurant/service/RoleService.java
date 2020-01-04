@@ -1,7 +1,7 @@
 package com.sda.restaurant.service;
 
 import com.sda.restaurant.dao.RoleRepository;
-import com.sda.restaurant.model.Role;
+import com.sda.restaurant.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

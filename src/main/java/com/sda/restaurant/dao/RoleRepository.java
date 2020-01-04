@@ -1,7 +1,9 @@
 package com.sda.restaurant.dao;
 
-import com.sda.restaurant.model.Role;
+import com.sda.restaurant.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 }

@@ -1,10 +1,7 @@
 package com.sda.restaurant;
 
-import com.sda.restaurant.model.Person;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 //@Configuration + @EnableAutoConfiguration + @ComponentScan
 @SpringBootApplication
