@@ -1,7 +1,7 @@
 package com.sda.restaurant.service;
 
-import com.sda.restaurant.entity.Person;
-import com.sda.restaurant.repository.PersonRepository;
+import com.sda.restaurant.model.Person;
+import com.sda.restaurant.dao.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,9 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-
-    public List<Person> getPersons(){
-        return personRepository.findAll();
-    }
+//    public List<Person> getPersons(){
+//        return personRepository.findAll();
+//    }
 
 //HW finish entites, service layer
 //  implement in service methods:
