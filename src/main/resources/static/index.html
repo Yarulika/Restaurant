@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table id="persons" border="1">
+        <tr>
+            <th>First name</th>
+            <th>Second name</th>
+        </tr>
+    </table>
+</body>
+<script>
+    var tbl = document.getElementById("persons")
+    function addTableRow(person) {
+        var row = tbl.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = person.firstName ;
+        cell2.innerHTML =  person.lastName;
+    }
+    fetch("/persons")
+        .then(httpResponse => httpResponse.json())
+        .then(persons => persons.reverse().map(person => addTableRow(person)))
+</script>
+</html>
