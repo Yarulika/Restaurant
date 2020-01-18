@@ -20,7 +20,7 @@ public class Role {
     @Column(name = "role_title")
     private String roleTitle;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<Person> persons = new HashSet<>();
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<Person> persons = new HashSet<>(); //NO NEED IN IT
 
 }

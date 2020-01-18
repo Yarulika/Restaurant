@@ -36,7 +36,7 @@ public class Person {
     private List<Order> orders;
 
     //Roles
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(
             name = "persons_roles",
             joinColumns = {@JoinColumn(name = "person_id")},

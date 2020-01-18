@@ -6,6 +6,8 @@ import com.sda.restaurant.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path="/persons")
 public class PersonController {
@@ -13,34 +15,67 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    // $ curl -v http://localhost:8080/persons/all
-    @GetMapping(path="/all")
+    // $ curl -v http://localhost:8080/persons
+    @GetMapping // (path="/all")
     public @ResponseBody Iterable<Person> getAllPersons(){
         return personService.findAll();
     }
 
-    // $ curl -v -X POST "http://localhost:8080/persons/add?fName=one&lName=two&email=aaa@a.com"
-    // @ResponseBody means the returned String is the response, not a view name
-    // @RequestParam means it is a parameter from the GET or POST request
-    @PostMapping(path="/add")
-    public @ResponseBody String addPerson(
-                    @RequestParam String fName,
-                    @RequestParam String lName,
-                    @RequestParam String email,
-                    @RequestParam String address,
-                    @RequestParam String username,
-                    @RequestParam String password) {
-        // TODO: check if person exists (by email)
-        // if (true) { return "exists"; }
-        Person p = new Person();
-        p.setFirstName(fName);
-        p.setLastName(lName);
-        p.setEmail(email);
-        p.setAddress(address);
-        p.setUsername(username);
-        p.setPassword(password);
-        personService.save(p);
-        return "Saved";
+    @PostMapping
+    public Person addPerson(@RequestBody Person person){
+        //@RequestBody = json obj from request
+        return personService.save(person);
     }
 
+    @PutMapping
+    public Person updateAllPersonDetails(@RequestBody Person person ){
+        return personService.save(person);
+    }
+
+    @PatchMapping //update certain user field
+    public Person updateSomePersonDetails(@RequestBody Person person){
+        return personService.update(person);
+    }
+
+    @DeleteMapping
+    public void deletePerson(@RequestBody Person person){
+        personService.delete(person);
+    }
+
+    // $ curl -v -X GET "http://localhost:8080/persons/aaa@a.com"
+    @GetMapping(path = "/{email}")
+    public Person getPersonByEmail(@PathVariable String email){
+        Optional<Person> person = personService.findPersonByEmail(email);
+        if (person.isPresent()) {
+            return person.get();
+        } else {
+            return null;
+        }
+    }
+
+    // $ curl -v -X POST "http://localhost:8080/persons/add?fName=one&lName=two&email=aaa@a.com"
+    // @RequestParam means it is a parameter from the GET or POST request
+//    @PostMapping(path="/add")
+//    public String addPersonParamsWay(
+//                    @RequestParam String fName,
+//                    @RequestParam String lName,
+//                    @RequestParam String email,
+//                    @RequestParam String address,
+//                    @RequestParam String username,
+//                    @RequestParam String password) {
+//        if (personService.ifPersonExistsByEmail(email)) {
+//            return "exists";
+//        }
+//        else {
+//            Person p = new Person();
+//            p.setFirstName(fName);
+//            p.setLastName(lName);
+//            p.setEmail(email);
+//            p.setAddress(address);
+//            p.setUsername(username);
+//            p.setPassword(password);
+//            personService.save(p);
+//            return "saved";
+//        }
+//    }
 }
