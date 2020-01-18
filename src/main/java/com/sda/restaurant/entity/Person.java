@@ -44,8 +44,4 @@ public class Person {
     )
     Set<Role> roles = new HashSet<>();
 
-
-
-
-
 }
