@@ -3,6 +3,8 @@ package com.sda.restaurant.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,20 +16,36 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 public class Person {
-    @Column(name = "person_id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Basic(optional = false)
+    @Column(name = "person_id")
     private Integer personId; //UUID ?
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "first_name")
     private String firstName;
+    @Basic(optional = false)
+    @NotNull
     @Column (name = "last_name")
     private String lastName;
+    @Basic(optional = false)
+    @NotNull
     @Column
+    //Add RegExp
     private String email;
     @Column
     private String address;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 3, max = 50)
     @Column
     private String username;
+//    @RestResource(exported = false)
+//    @JsonIgnore
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 3, max = 256)
     @Column
     private String password;
 
