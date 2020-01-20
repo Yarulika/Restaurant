@@ -50,4 +50,12 @@ public class PersonService {
         return personRepository.findByRolesRoleTitle(role);
     }
 
+    public List<Person> getTopTenBuyers(){
+        return null;
+//        return personRepository.
+        //TODO
+
+    }
+
+
 }

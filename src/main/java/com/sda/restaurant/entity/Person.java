@@ -32,8 +32,8 @@ public class Person {
     private String password;
 
     //Orders
-    @OneToMany(mappedBy = "person")
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "person")
+//    private List<Order> orders;
 
     //Roles
     @ManyToMany

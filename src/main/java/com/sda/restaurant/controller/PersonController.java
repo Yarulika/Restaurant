@@ -1,7 +1,9 @@
 package com.sda.restaurant.controller;
 
 import com.sda.restaurant.dao.PersonRepository;
+import com.sda.restaurant.entity.Order;
 import com.sda.restaurant.entity.Person;
+import com.sda.restaurant.service.OrderService;
 import com.sda.restaurant.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ public class PersonController {
 
     @Autowired
     private PersonService personService;
+    @Autowired
+    private OrderService orderService;
 
     // $ curl -v http://localhost:8080/persons
     @GetMapping // (path="/all")
@@ -52,6 +56,17 @@ public class PersonController {
             return null;
         }
     }
+
+    @GetMapping(path = "/{id}/orders")
+    public Iterable<Order> getPersonsOrders(@PathVariable int id){
+        return orderService.getOrdersForPerson(id);
+    }
+
+    @GetMapping(path = "/topten")
+    public @ResponseBody Iterable<Person> getTopTenBuyers(){
+        return personService.getTopTenBuyers(); //TODO
+    }
+
 
     // $ curl -v -X POST "http://localhost:8080/persons/add?fName=one&lName=two&email=aaa@a.com"
     // @RequestParam means it is a parameter from the GET or POST request

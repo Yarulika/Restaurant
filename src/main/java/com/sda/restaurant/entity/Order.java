@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity(name = "orders")
@@ -25,7 +24,7 @@ public class Order {
     @JoinColumn(name = "person_id")
     private Person person;
 
-    @Column //date in Unix time, UTC time zone
+    @Column // = unix seconds, UTC time zone
     private Long date;
     @Column
     private int cost;
