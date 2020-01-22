@@ -3,10 +3,11 @@ package com.sda.restaurant.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "persons") //This tells Hibernate to make a table out of this class
@@ -21,30 +22,38 @@ public class Person {
     @Basic(optional = false)
     @Column(name = "person_id")
     private Integer personId; //UUID ?
+
     @Basic(optional = false)
-    @NotNull
+    @NotBlank(message = "First name may not be blank")
+    @Size(min = 1, max = 32, message = "First name must be between 1 and 32 characters long")
     @Column(name = "first_name")
     private String firstName;
+
     @Basic(optional = false)
-    @NotNull
+    @NotBlank(message = "Last name may not be blank")
+    @Size(min = 1, max = 32, message = "Last name must be between 1 and 32 characters long")
     @Column (name = "last_name")
     private String lastName;
+
     @Basic(optional = false)
-    @NotNull
+    @NotBlank(message = "Email must not be blank")
     @Column
-    //Add RegExp
+    @Pattern(regexp="^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message="not proper email format")
     private String email;
+
     @Column
     private String address;
+
     @Basic(optional = false)
-    @NotNull
+    @NotBlank(message = "Username must not be blank")
     @Size(min = 3, max = 50)
     @Column
     private String username;
+
 //    @RestResource(exported = false)
 //    @JsonIgnore
     @Basic(optional = false)
-    @NotNull
+    @NotBlank(message = "Password must not be blank")
     @Size(min = 3, max = 256)
     @Column
     private String password;
