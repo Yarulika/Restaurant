@@ -1,0 +1,3 @@
+ALTER TABLE meals
+CHANGE COLUMN meal_title meal_title VARCHAR(255) NOT NULL ,
+CHANGE COLUMN price price INT(11) NOT NULL ;
