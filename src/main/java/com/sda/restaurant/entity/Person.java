@@ -3,10 +3,7 @@ package com.sda.restaurant.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,13 +21,13 @@ public class Person {
     private Integer personId; //UUID ?
 
     @Basic(optional = false)
-    @NotBlank(message = "First name may not be blank")
+    @NotBlank(message = "First name must not be blank")
     @Size(min = 1, max = 32, message = "First name must be between 1 and 32 characters long")
     @Column(name = "first_name")
     private String firstName;
 
     @Basic(optional = false)
-    @NotBlank(message = "Last name may not be blank")
+    @NotBlank(message = "Last name must not be blank")
     @Size(min = 1, max = 32, message = "Last name must be between 1 and 32 characters long")
     @Column (name = "last_name")
     private String lastName;
@@ -38,6 +35,7 @@ public class Person {
     @Basic(optional = false)
     @NotBlank(message = "Email must not be blank")
     @Column
+//    @Email(message = "email must be in proper format") //seems too surface check
     @Pattern(regexp="^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message="not proper email format")
     private String email;
 
