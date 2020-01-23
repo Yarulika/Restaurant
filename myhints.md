@@ -3,10 +3,14 @@ My hints, tips, lessons learned
 //=================================================
 TODO
 
+Exception handling:
+- ResponseEntity<T>
+- throws custom exception (PersonNotFoundException)
+
 Queries:
 - use naming queries (when simple) 
 - better not native query
-- query DSL
+- Querydsl 
 - criteria query  
 
 NULL:
@@ -66,6 +70,14 @@ Try to make custom exception: Spring exception handlers
 //    @RequestBody (vs ResponseBody, Param)
 //    @RequestParam
 //=================================================
+** serialVersionUID **
+The serialVersionUID is used as a version control in a Serializable class. 
+If you do not explicitly declare a serialVersionUID, JVM will do it for you automatically, based on various aspects of your Serializable class, as described in the Java(TM) Object Serialization Specification.
+
+IntelliJ Preferences -> Editor -> Inspections -> Java -> Serialization issues -> 
+Serializable class without 'serialVersionUID' - set flag and click 'OK'.
+
+//=================================================
 SELECT * FROM restaurant.orders
 WHERE person_id = 2;
 ----
@@ -73,6 +85,13 @@ SELECT person_id, SUM(cost) as summary
 FROM orders
 GROUP BY person_id
 ORDER BY summary DESC
+----
+SELECT * FROM persons 
+JOIN (
+	SELECT orders.person_id AS ID, SUM(orders.cost) AS COST FROM orders
+	GROUP BY orders.person_id
+    ) AS sum ON persons.person_id = sum.ID
+ORDER BY COST DESC
 
 //=================================================
 ALTER TABLE `restaurant`.`meals` 
