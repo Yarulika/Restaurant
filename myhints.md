@@ -1,5 +1,65 @@
 My hints, tips, lessons learned
 
+//=================================================
+TODO
+
+Queries:
+- use naming queries (when simple) 
+- better not native query
+- query DSL
+- criteria query  
+
+NULL:
+better not return null: empty response if none
+service layer: return optional or collection
+    // if List - return empty list
+    // if single obj - Optional
+controller level (only controller knows about http and rest): empty response if none
+
+save: checks before
+delete: check id exists - else throw exception
+update : check, exception
+PATCH: takes parameters (check each param)
+
+
+Pagination + sorting (for find all)
+
+Controller validation: @Valid @Notnull
+
+Entity validation: @NotNull @Min @Max
+regex annotation for email
+
+Try to make custom exception: Spring exception handlers
+
+//=================================================
+// Requirements
+//
+// create user +
+// update all user data (PUT) + 
+// update certain user field +
+// delete user +
+// get user by email +
+// create order + (TODO: finish meal)
+// list all today's orders (TO FINISH findForToday())
+// list user's order + 
+// list top 10 users & payment order by highest payment
+//
+// Testing (Postman)
+// insert 15 users
+// update user #1 : all data
+// update user #2: only name
+// create orders for different users
+//
+// think about corner cases +  do validation
+//=================================================
+
+// unit tests
+// frontend: list of users
+
++ Spring Boot response status code
+//=================================================
+//=================================================
+
 //    /{customerId}
 //    @PathVariable Integer customerId
 
@@ -47,3 +107,55 @@ CHANGE COLUMN `price` `price` INT(11) NOT NULL ;
 //        }
 //    }
 //=================================================
+//        Optional<Person> person = personService.findPersonByEmail(email);
+//        if (person.isPresent()) {
+//            return person.get();
+//        } else {
+//            return null;
+//        }
+// EQUAL =
+//        return personService.findPersonByEmail(email).orElse(null);
+
+//=================================================
+            return ResponseEntity.status(200).header("X-APP-VERSION", "v.1.000").body(p.get());
+//=================================================
+    // $ curl -v -X GET "http://localhost:8080/persons/aaa@a.com"
+//    @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+//    void teaPot() {}
+    @GetMapping(path = "/{email}")
+    public ResponseEntity<Person> getPersonByEmail(@PathVariable String email) {
+        Optional<Person> p = personService.findByEmail(email);
+        if (p.isPresent()) {
+            return ResponseEntity.ok(p.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+//return ResponseEntity.status(404).body(personService.findPersonByEmail(email))
+    }
+    
+//=================================================
+
+@NotNull VS @NotEmpty VS and @NotBlank
+@NotNull: a constrained CharSequence, Collection, Map, or Array is valid as long as it's not null, but it can be empty
+@NotEmpty: a constrained CharSequence, Collection, Map, or Array is valid as long as it's not null and its size/length is greater than zero
+@NotBlank: a constrained String is valid as long as it's not null and the trimmed length is greater than zero
+
+//=================================================
+//public class PersonService 
+
+    public Person findByIdOrNull(Integer id) {
+        return personRepository.findById(id).orElse(null);
+//        Explanation: //before using optional - check if exists
+//        Optional<Person> optionalPerson = personRepository.findById(id);
+//        if (optionalPerson.isPresent()) {
+//            optionalPerson.get();
+//        }else{
+//            return null;
+//        }
+//        return optionalPerson.orElse(null);
+//        return personRepository.findById(id);
+    }
+//=================================================
+
+
