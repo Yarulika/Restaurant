@@ -18,11 +18,4 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
                 nativeQuery = true)
     List<Order> getForPerson(int id);
 
-    List<Order> findTop10ByOrderByCostDesc();
-
-//    @Query(value = "")
-//    SELECT person_id, SUM(cost) as summary
-//    FROM orders
-//    GROUP BY person_id
-//    ORDER BY summary DESC
 }

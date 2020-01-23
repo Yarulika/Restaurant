@@ -13,7 +13,7 @@ public class CustomerController {
     private PersonService personService;
 
     // $ curl -v http://localhost:8080/customers
-    @GetMapping  //(path="/all")
+    @GetMapping
     public @ResponseBody Iterable<Person> getAllCustomers(){
         return personService.findPersonsByRoles("customer");
     }

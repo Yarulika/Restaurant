@@ -42,11 +42,6 @@ public class PersonService {
     }
 
     public List<Person> getTopTenBuyers(){
-        return null;
-//        return personRepository.
-        //TODO
-
+        return personRepository.getTenTopBuyers();
     }
-
-
 }

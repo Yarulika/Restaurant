@@ -12,8 +12,6 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
-    @Autowired
-    private PersonService personService;
 
     // $ curl -v http://localhost:8080/orders
     @GetMapping
@@ -30,20 +28,4 @@ public class OrderController {
     public @ResponseBody Iterable<Order> getTodaysOrders(){
         return orderService.findForToday();
     }
-
-
-//    @PostMapping(path = "/add")
-//    public @ResponseBody String addOrder(
-//            @RequestParam Integer personId,
-//            @RequestParam Date date,
-//            @RequestParam Integer cost) {
-//
-//        Person p = personService.findByIdOrNull(personId);
-//        Order o = new Order();
-//        o.setPerson(p);
-//        o.setDate(date);
-//        o.setCost(cost);
-//        orderService.save(o);
-//        return "saved";
-//    }
 }

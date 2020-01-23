@@ -11,7 +11,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 
-class PersonServiceTest {
+public class PersonServiceTest {
 
 //    @Autowired
 //    private PersonRepository personRepository;

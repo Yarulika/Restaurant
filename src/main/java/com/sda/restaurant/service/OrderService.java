@@ -34,7 +34,6 @@ public class OrderService {
         long dayEndSec = ((nowDays+1) * 60*60*24) - 1;
         // today: from dayStartSec to dayEndSec
         return orderRepository.getForToday(dayStartSec, dayEndSec);
-
     }
 
     public Iterable<Order> getOrdersForPerson(int id){
