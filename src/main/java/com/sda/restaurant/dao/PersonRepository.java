@@ -13,7 +13,6 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {     /
     List<Person> findByRolesRoleTitle(String role);
 
 //    2) native sql query
-    //TODO ? does not work, will finish
     @Query(value=
             "SELECT persons.* FROM persons " +
             "JOIN (SELECT orders.person_id AS id, SUM(orders.cost) AS cost_sum FROM orders "+
@@ -23,5 +22,4 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {     /
             "LIMIT 10; "
         , nativeQuery = true)
     List<Person> getTenTopBuyers();
-
 }
