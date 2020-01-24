@@ -10,9 +10,11 @@ import com.sda.restaurant.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
@@ -33,16 +35,22 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Person> addPerson(@RequestBody Person person) throws PersonDetailsFoundException {
-        if (person.getPersonId() != null) {
-            if (personService.findById(person.getPersonId()).isPresent()) {
-                throw new PersonDetailsFoundException("Person with id: " + person.getPersonId() + " already exists");
-            }
+    public ResponseEntity<Person> addPerson(@Valid @RequestBody Person person, BindingResult bindingResult) throws PersonDetailsFoundException {
+        if (bindingResult.hasErrors()){
+            throw new PersonDetailsFoundException("Incorrect person details"); //TODO add IncorrectPersonDetailsException (and replace here)
         }
-        if (personService.findByEmail(person.getEmail()).isPresent()) {
-            throw new PersonDetailsFoundException("Person with email: " + person.getEmail() + " already exists");
-        } else
-            return ResponseEntity.ok(personService.addNew(person));
+        else {
+            // new person's details looks ok, proceed with further checks
+            if (person.getPersonId() != null) {
+                if (personService.findById(person.getPersonId()).isPresent()) {
+                    throw new PersonDetailsFoundException("Person with id: " + person.getPersonId() + " already exists");
+                }
+            }
+            if (personService.findByEmail(person.getEmail()).isPresent()) {
+                throw new PersonDetailsFoundException("Person with email: " + person.getEmail() + " already exists");
+            } else
+                return ResponseEntity.ok(personService.addNew(person));
+        }
     }
 
     @PutMapping
