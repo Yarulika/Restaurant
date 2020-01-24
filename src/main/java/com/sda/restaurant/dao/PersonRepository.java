@@ -15,12 +15,12 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {     /
 //    2) native sql query
     //TODO ? does not work, will finish
     @Query(value=
-            "SELECT * FROM persons" +
-            "JOIN (SELECT orders.person_id AS id, SUM(orders.cost) AS cost_sum FROM orders"+
-            "GROUP BY orders.person_id"+
-            ") AS sum_tb ON persons.person_id = sum_tb.id"+
-            "ORDER BY cost_sum DESC"+
-            "LIMIT 10;"
+            "SELECT persons.* FROM persons " +
+            "JOIN (SELECT orders.person_id AS id, SUM(orders.cost) AS cost_sum FROM orders "+
+            "GROUP BY orders.person_id "+
+            ") AS sum_tb ON persons.person_id = sum_tb.id "+
+            "ORDER BY cost_sum DESC "+
+            "LIMIT 10; "
         , nativeQuery = true)
     List<Person> getTenTopBuyers();
 
