@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+//TODO: great idea do it & remove unused lines
 //could be ENUM
 @Entity(name = "roles")
 @Getter

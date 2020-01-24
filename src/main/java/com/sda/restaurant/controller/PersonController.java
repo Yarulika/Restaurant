@@ -61,7 +61,7 @@ public class PersonController {
 //            ? if it is ok TODO ->
             return new ResponseEntity<>((Person) null, HttpStatus.NOT_FOUND);
     }
-
+//TODO: could use map and reflection or keep it like this [more advance]
     @PatchMapping(path = "/{personId}")   //update certain user field(s): firstName, lastName, email, address, username, password
     public Person updateSomePersonDetails(@RequestBody Person newPerson, @PathVariable int personId) throws PersonNotFoundException {
         Optional<Person> person = personService.findById(personId);
@@ -140,6 +140,7 @@ public class PersonController {
         return personService.getTopTenBuyers();
     }
 
+    //TODO: move exception handler for separate class
     @ExceptionHandler(PersonNotFoundException.class)
     public void handlePersonNotFoundException(PersonNotFoundException exception, HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.NOT_FOUND.value(), exception.getMessage());

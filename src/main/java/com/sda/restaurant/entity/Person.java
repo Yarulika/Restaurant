@@ -13,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+//TODO: remove commented lines that no need for it
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
