@@ -37,7 +37,7 @@ public class PersonController {
     @PostMapping
     public ResponseEntity<Person> addPerson(@Valid @RequestBody Person person, BindingResult bindingResult) throws PersonDetailsFoundException {
         if (bindingResult.hasErrors()){
-            throw new PersonDetailsFoundException("Incorrect person details"); //TODO add IncorrectPersonDetailsException (and replace here)
+            throw new PersonDetailsFoundException("Incorrect person details"); //TODO add IncorrectPersonDetailsException(& replace): but how to show what is exactly wrong
         }
         else {
             // new person's details looks ok, proceed with further checks
