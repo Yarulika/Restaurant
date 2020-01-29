@@ -62,7 +62,7 @@ public class Person {
 //    private List<Order> orders;
 
     //Roles
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "persons_roles",
             joinColumns = {@JoinColumn(name = "person_id")},
