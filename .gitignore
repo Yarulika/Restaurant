@@ -1,6 +1,8 @@
-#TODO
-# .gitignore is great but you missed adding
-# .mvn/wrapper, mvnw, mvnw.cmd and myhints.md
+
+.mvn/wrapper
+mvnw
+mvnw.cmd
+myhints.md
 
 HELP.md
 target/
