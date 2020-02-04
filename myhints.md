@@ -1,6 +1,12 @@
 My hints, tips, lessons learned
 
 //=================================================
+    // CODE EVALUATION (analysis)
+    //Sonar Cube && Sonar Lint (?plugin) (then Analyze with e.g. sonar cube)
+    // 1) Remove unused code
+    // 2) format code
+    // Optimise imports + reformat code (from parent folder)
+//=================================================
 TODO
 
 Exception handling:
