@@ -14,40 +14,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+// TODO: will reconfigure
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserServiceImpl userService;
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-                .antMatchers(
-                        "/persons",
-                        "/test",
-//                        "/registration**",
-                        "/js/**").permitAll()
-                .anyRequest().anonymous()//.authenticated()
-                .and()
-            .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-                .and()
-            .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
-                .permitAll();
-    }
-
-// ? below was needed to create first user
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/persons");
-//    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder(); }
@@ -64,5 +36,49 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
+    @Override // WebSecurity = ignoring() method: this will omit the request pattern from the security filter chain entirely (! no authentication or authorization services applied)
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/**");
+//        web.ignoring().antMatchers("/restaurant/persons/**");
+        super.configure(web);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                    .antMatchers("/employees/**").hasAnyRole("employee")
+                    .anyRequest().hasAnyRole("customer")
+                    .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/hi")
+                .permitAll();
+
+
+//        http
+//            .authorizeRequests()
+//                .antMatchers(
+//                        "/persons",
+//                        "/test",
+////                        "/registration**",
+//                        "/js/**").permitAll()
+//                .anyRequest().anonymous()//.authenticated()
+//                .and()
+//            .formLogin()
+////                .loginPage("/login")
+////                .permitAll()
+//                .and()
+//            .logout()
+//                .invalidateHttpSession(true)
+//                .clearAuthentication(true)
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/login?logout")
+//                .permitAll();
+    }
+
+
 
 }
