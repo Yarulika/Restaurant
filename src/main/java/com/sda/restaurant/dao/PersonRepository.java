@@ -9,10 +9,9 @@ import java.util.List;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer> {     //JpaRepository<Person, Integer>
-//    1) query by names: findByRoles || findByRolesRoleTitle
+
     List<Person> findByRolesRoleTitle(String role);
 
-//    2) native sql query
     @Query(value=
             "SELECT persons.* FROM persons " +
             "JOIN (SELECT orders.person_id AS id, SUM(orders.cost) AS cost_sum FROM orders "+
