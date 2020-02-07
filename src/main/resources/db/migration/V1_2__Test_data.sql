@@ -11,14 +11,16 @@ INSERT INTO `restaurant`.`persons_roles` (`person_id`,`role_id`) VALUES (1,1);
 INSERT INTO `restaurant`.`persons_roles` (`person_id`,`role_id`) VALUES (1,2);
 INSERT INTO `restaurant`.`persons_roles` (`person_id`,`role_id`) VALUES (2,1);
 INSERT INTO `restaurant`.`persons_roles` (`person_id`,`role_id`) VALUES (3,2);
+INSERT INTO `restaurant`.`persons_roles` (`person_id`,`role_id`) VALUES (4,1);
+INSERT INTO `restaurant`.`persons_roles` (`person_id`,`role_id`) VALUES (5,2);
 
 
 INSERT INTO `restaurant`.`meals` (`meal_id`, `meal_title`, `price`) VALUES ('1', 'Chicken salad', '11');
 INSERT INTO `restaurant`.`meals` (`meal_id`, `meal_title`, `price`) VALUES ('2', 'Meatballs with spaghetti', '22');
 INSERT INTO `restaurant`.`meals` (`meal_id`, `meal_title`, `price`) VALUES ('3', 'Coffee', '4');
 
-INSERT INTO `restaurant`.`orders` (`order_id`, `cost`, `date`, `person_id`) VALUES ('1', '30', '1580734800', '1');
-INSERT INTO `restaurant`.`orders` (`order_id`, `cost`, `date`, `person_id`) VALUES ('2', '20', '1580734800', '2');
+INSERT INTO `restaurant`.`orders` (`order_id`, `cost`, `date`, `person_id`) VALUES ('1', '30', '1581067440', '1');
+INSERT INTO `restaurant`.`orders` (`order_id`, `cost`, `date`, `person_id`) VALUES ('2', '20', '1581067440', '2');
 INSERT INTO `restaurant`.`orders` (`order_id`, `cost`, `date`, `person_id`) VALUES ('3', '80', '1580734800', '2');
 
 INSERT INTO `restaurant`.`order_meals` (`order_meals_id`, `quantity`, `unit_price`, `meal_id`, `order_id`) VALUES ('1', '1', '20', '1', '1');
