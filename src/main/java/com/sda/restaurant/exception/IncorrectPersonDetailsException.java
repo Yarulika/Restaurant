@@ -19,7 +19,7 @@ public class IncorrectPersonDetailsException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        String msg = "Person has incorrect details 2";
+        String msg = "Person has incorrect details";
         List<ObjectError> errors = bindingResult.getAllErrors();
         for (ObjectError er: errors){
             msg = msg + " " + er.getDefaultMessage();
