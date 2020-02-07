@@ -17,12 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "order_id")
     private Integer orderId;
 
-    //Person: many orders may belong to one person
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
@@ -33,12 +32,10 @@ public class Order {
     private Long date;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 0, max = 1000)
     @Column
     private int cost;
 
-    //order_meals
-    @OneToMany(mappedBy = "order")
-    private List<OrderMeals> orderMeals;
+//    @OneToMany(mappedBy = "order")
+//    private List<OrderMeals> orderMeals;
 
 }

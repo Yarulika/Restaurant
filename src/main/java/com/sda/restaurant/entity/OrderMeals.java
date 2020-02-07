@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class OrderMeals {
     @Column(name = "order_meals_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer orderMealsId;
 
@@ -22,7 +22,6 @@ public class OrderMeals {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    //Meal: many OrderMeals(order details) may belong to one meal
     @ManyToOne
     @JoinColumn(name = "meal_id")
     private Meal meal;

@@ -15,7 +15,7 @@ import java.util.List;
 @ToString
 public class Meal {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "meal_id")
     private Integer mealId;
@@ -26,11 +26,9 @@ public class Meal {
     private String mealTitle;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max=10000)
     @Column
     private Integer price;
 
-    //OrderMeals
-    @OneToMany(mappedBy = "meal")
-    private List<OrderMeals> orderMeals;
+//    @OneToMany(mappedBy = "meal")
+//    private List<OrderMeals> orderMeals;
 }

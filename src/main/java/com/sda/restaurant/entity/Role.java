@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 //TODO: great idea do it & remove unused lines
 //could be ENUM
+
 @Entity(name = "roles")
 @Getter
 @Setter
@@ -16,7 +17,7 @@ import javax.validation.constraints.Size;
 @ToString
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "role_id")
     private Integer roleId;
@@ -24,9 +25,16 @@ public class Role {
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "role_title")
+//    @Enumerated(EnumType.STRING)
     private String roleTitle;
+//    private RoleTitle roleTitle;
 
 //    @ManyToMany(mappedBy = "roles")
-//    private Set<Person> persons = new HashSet<>(); //NO NEED IN IT
+//    private Set<Person> persons = new HashSet<>();
 
+
+//    public enum RoleTitle {
+//        CUSTOMER,
+//        EMPLOYEE;
+//    }
 }

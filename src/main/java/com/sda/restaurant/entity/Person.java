@@ -13,13 +13,14 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+
 //TODO: remove commented lines that no need for it
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "person_id")
-    private Integer personId; //UUID ?
+    private Integer personId;
 
     @Basic(optional = false)
     @NotBlank(message = "First name must not be blank")
@@ -57,11 +58,9 @@ public class Person {
     @Column
     private String password;
 
-    //Orders
 //    @OneToMany(mappedBy = "person")
 //    private List<Order> orders;
 
-    //Roles
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "persons_roles",
