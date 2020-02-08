@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserDetailsService  {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
         Person person = personService.findByEmail(s).orElseThrow(() -> new PersonNotFoundException(s));
-        List<SimpleGrantedAuthority> grantedAuthorities = person.getRoles().parallelStream().map(role -> new SimpleGrantedAuthority(role.getRoleTitle())).collect(Collectors.toList());
+        List<SimpleGrantedAuthority> grantedAuthorities = person.getRoles().parallelStream().map(role -> new SimpleGrantedAuthority(role.getRoleTitle().name())).collect(Collectors.toList());
         return new User(person.getEmail(),person.getPassword(),grantedAuthorities);
     }
 
