@@ -1,5 +1,7 @@
 package com.sda.restaurant.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,6 +9,7 @@ import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@ApiModel(description = "Details of person")
 @Entity(name = "persons") //This tells Hibernate to make a table out of this class
 @Getter
 @Setter
@@ -16,6 +19,7 @@ import java.util.Set;
 
 //TODO: remove commented lines that no need for it
 public class Person {
+    @ApiModelProperty(notes = "The unique person's id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)

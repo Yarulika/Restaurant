@@ -8,6 +8,7 @@ import com.sda.restaurant.exception.PersonAlreadyExists;
 import com.sda.restaurant.exception.PersonNotFoundException;
 import com.sda.restaurant.service.OrderService;
 import com.sda.restaurant.service.PersonService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,10 @@ public class PersonController {
     private OrderService orderService;
 
     // $ curl -v http://localhost:8080/restaurant/persons
+    @ApiOperation(value = "Get all persons", notes = "Get all persons: both employees and customers.")
     @GetMapping(path = "/restaurant/persons")
-    public @ResponseBody Iterable<Person> getAllPersons() {
+    @ResponseBody
+    public Iterable<Person> getAllPersons() {
         return personService.findAll();
     }
 
