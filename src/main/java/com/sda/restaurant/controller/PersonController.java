@@ -9,6 +9,8 @@ import com.sda.restaurant.exception.PersonNotFoundException;
 import com.sda.restaurant.service.OrderService;
 import com.sda.restaurant.service.PersonService;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ import java.util.Set;
 
 @RestController
 public class PersonController {
+
+    Logger logger = LoggerFactory.getLogger(PersonController.class);
 
     @Autowired
     private PersonService personService;
@@ -52,8 +56,10 @@ public class PersonController {
     public ResponseEntity<Person> getPersonByEmail(@PathVariable String email) {
         Optional<Person> person = personService.findByEmail(email);
         if (person.isPresent()) {
+            logger.trace("Person with email was found: " + email);
             return ResponseEntity.ok(person.get());
         } else {
+            logger.error("Person with email was not found: " + email);
             return ResponseEntity.notFound().build();
         }
     }
