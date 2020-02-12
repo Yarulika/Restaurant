@@ -1,16 +1,8 @@
--- -----------------------------------------------------
--- Schema restaurant
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `restaurant`
-    DEFAULT CHARACTER SET utf8
-    COLLATE utf8_bin;
-USE `restaurant`;
-
 
 -- -----------------------------------------------------
--- Table `restaurant`.`persons`
+-- Table `persons`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `restaurant`.`persons`
+CREATE TABLE IF NOT EXISTS `persons`
 (
     `person_id`  INT(11)      NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(255) NULL DEFAULT NULL,
@@ -27,16 +19,16 @@ CREATE TABLE IF NOT EXISTS `restaurant`.`persons`
 
 
 -- -----------------------------------------------------
--- Table `restaurant`.`orders`
+-- Table `orders`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `restaurant`.`orders`
+CREATE TABLE IF NOT EXISTS `orders`
 (
     `order_id`  INT(11)    NOT NULL AUTO_INCREMENT,
     `cost`      INT(11)    NULL DEFAULT NULL,
     `date`      BIGINT(20) NULL DEFAULT NULL,
     `person_id` INT(11)    NOT NULL,
     PRIMARY KEY (`order_id`),
-    FOREIGN KEY (`person_id`) REFERENCES `restaurant`.`persons` (`person_id`)
+    FOREIGN KEY (`person_id`) REFERENCES `persons` (`person_id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8
@@ -44,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `restaurant`.`orders`
 
 
 -- -----------------------------------------------------
--- Table `restaurant`.`meals`
+-- Table `meals`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `restaurant`.`meals`
+CREATE TABLE IF NOT EXISTS `meals`
 (
     `meal_id`    INT(11)      NOT NULL AUTO_INCREMENT,
     `meal_title` VARCHAR(255) NOT NULL,
@@ -59,9 +51,9 @@ CREATE TABLE IF NOT EXISTS `restaurant`.`meals`
 
 
 -- -----------------------------------------------------
--- Table `restaurant`.`order_meals`
+-- Table `order_meals`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `restaurant`.`order_meals`
+CREATE TABLE IF NOT EXISTS `order_meals`
 (
     `order_meals_id` INT(11) NOT NULL AUTO_INCREMENT,
     `quantity`       INT(11) NOT NULL DEFAULT 1,
@@ -69,8 +61,8 @@ CREATE TABLE IF NOT EXISTS `restaurant`.`order_meals`
     `meal_id`        INT(11) NOT NULL ,
     `order_id`       INT(11) NOT NULL ,
     PRIMARY KEY (`order_meals_id`),
-    FOREIGN KEY (`order_id`) REFERENCES `restaurant`.`orders` (`order_id`),
-    FOREIGN KEY (`meal_id`) REFERENCES `restaurant`.`meals` (`meal_id`)
+    FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+    FOREIGN KEY (`meal_id`) REFERENCES `meals` (`meal_id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8
@@ -78,9 +70,9 @@ CREATE TABLE IF NOT EXISTS `restaurant`.`order_meals`
 
 
 -- -----------------------------------------------------
--- Table `restaurant`.`roles`
+-- Table `roles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `restaurant`.`roles`
+CREATE TABLE IF NOT EXISTS `roles`
 (
     `role_id`    INT(11)      NOT NULL AUTO_INCREMENT,
     `role_title` VARCHAR(255) NULL DEFAULT NULL,
@@ -92,15 +84,15 @@ CREATE TABLE IF NOT EXISTS `restaurant`.`roles`
 
 
 -- -----------------------------------------------------
--- Table `restaurant`.`persons_roles`
+-- Table `persons_roles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `restaurant`.`persons_roles`
+CREATE TABLE IF NOT EXISTS `persons_roles`
 (
     `person_id` INT(11) NOT NULL AUTO_INCREMENT,
     `role_id`   INT(11) NOT NULL,
     PRIMARY KEY (`person_id`, `role_id`),
-    FOREIGN KEY (`role_id`) REFERENCES `restaurant`.`roles` (`role_id`),
-    FOREIGN KEY (`person_id`) REFERENCES `restaurant`.`persons` (`person_id`)
+    FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`),
+    FOREIGN KEY (`person_id`) REFERENCES `persons` (`person_id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8
