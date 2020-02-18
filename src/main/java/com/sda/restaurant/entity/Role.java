@@ -36,14 +36,22 @@ public class Role {
     public enum RoleTitle {
         CUSTOMER,
         EMPLOYEE;
+//        CUSTOMER(1),
+//        EMPLOYEE(2);
 
         // Returns RoleTitle from String case insensitive
         public static RoleTitle deserialize(String name) {
             return RoleTitle.valueOf(name.toUpperCase());
         }
         // Returns RoleTitle by index zero-based
-        public static RoleTitle deserialize(Integer idx) {
-            return RoleTitle.values()[idx];
-        }
+//        public static RoleTitle deserialize(Integer idx) {
+//            return RoleTitle.values()[idx];
+//        }
     }
+
+//    public enum ComplexRole {
+//        1("CUSTOMER"),
+//        2("EMPLOYEE")
+//    }
+
 }

@@ -2,6 +2,7 @@ package com.sda.restaurant.service;
 
 import com.sda.restaurant.dao.PersonRepository;
 import com.sda.restaurant.entity.Person;
+import com.sda.restaurant.entity.Role;
 import com.sda.restaurant.exception.PersonAlreadyExists;
 import com.sda.restaurant.exception.PersonNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,11 @@ public class PersonService {
     }
 
     public List<Person> findPersonsByRoles(@NotBlank String role) {
-        return personRepository.findByRolesRoleTitle(role);
+        // TODO FIX
+//        return null;
+
+        return personRepository.findByRolesRoleTitle(Role.RoleTitle.deserialize(role));
+
     }
 
     public List<Person> getTopTenBuyers() {
