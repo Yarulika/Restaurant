@@ -32,8 +32,8 @@ public class PersonServiceTest {
 
     @Before
     public void setUp() {
-        Person person1 = new Person(null, "person1", "ln1", "p1@gmail.com", "Espo", "p1username", "pass1", null);
-        Person person2 = new Person(null, "person2", "ln2", "p2@gmail.com", "Espo", "p2username", "pass2", null);
+        person1 = new Person(null, "person1", "ln1", "p1@gmail.com", "Espo", "p1username", "pass1", null);
+        person2 = new Person(null, "person2", "ln2", "p2@gmail.com", "Espo", "p2username", "pass2", null);
     }
 
     @Test
@@ -44,9 +44,8 @@ public class PersonServiceTest {
 
     @Test
     public void whenValidEmail_thenPersonFound() {
-        Person person1 = new Person(null, "person1", "ln1", "p1@gmail.com", "Espo", "p1username", "pass1", null);
         String email = "p1@gmail.com";
-
+        System.out.println(personRepository.toString());
         when(personRepository.findByEmail(email)).thenReturn(person1);
         assertEquals(person1.getEmail(), personRepository.findByEmail(email).getEmail());
     }
